@@ -93,28 +93,28 @@
 </head>
 <body>
 <header>
-  <h1>ð <span>Tatsumi</span> Store</h1>
+  <h1>🛒 <span>Tatsumi</span> Store</h1>
   <div class="search">
-    <input id="search" type="text" placeholder="Search groceriesâ¦" aria-label="Search products">
+    <input id="search" type="text" placeholder="Search groceries…" aria-label="Search products">
     <button onclick="applySearch()">Go</button>
   </div>
-  <button class="icon-btn" id="themeBtn" onclick="toggleTheme()" title="Toggle light/dark">â</button>
-  <button class="icon-btn" onclick="openCart()" title="Open basket">ð§º<span id="cartCount">0</span></button>
+  <button class="icon-btn" id="themeBtn" onclick="toggleTheme()" title="Toggle light/dark">◐</button>
+  <button class="icon-btn" onclick="openCart()" title="Open basket">🧺<span id="cartCount">0</span></button>
 </header>
 <nav class="cats" id="cats"></nav>
 <main><div class="grid" id="grid"></div></main>
 
 <div id="overlay" onclick="closeCart()"></div>
 <aside id="drawer" aria-label="Shopping basket">
-  <header><h2>Your Basket</h2><button id="closeCart" onclick="closeCart()">â</button></header>
+  <header><h2>Your Basket</h2><button id="closeCart" onclick="closeCart()">✕</button></header>
   <div id="cartItems"></div>
   <div id="cartFoot">
     <div id="subtotal"><span>Subtotal</span><span id="subAmt">$0.00</span></div>
     <button id="checkout" onclick="checkout()">Checkout</button>
-    <div id="note">Demo store â connect a payment provider to take real orders.</div>
+    <div id="note">Demo store — connect a payment provider to take real orders.</div>
   </div>
 </aside>
-<footer>Tatsumi Store â demo storefront. Sample prices for illustration.</footer>
+<footer>Tatsumi Store — demo storefront. Sample prices for illustration.</footer>
 <script>
 /* ---------- product art (inline SVG, no external files needed) ---------- */
 const ART = {
@@ -125,7 +125,8 @@ banana:`<svg viewBox="0 0 100 100"><path d="M20 30 Q55 35 78 70 Q60 62 35 55 Q22
 bread:`<svg viewBox="0 0 100 100"><rect x="20" y="40" width="60" height="34" rx="16" fill="#d99a55"/><rect x="20" y="58" width="60" height="16" rx="8" fill="#c07f3e"/><path d="M35 48 l6 6 M50 48 l6 6 M65 48 l6 6" stroke="#a86a2f" stroke-width="3"/></svg>`,
 rice:`<svg viewBox="0 0 100 100"><rect x="32" y="28" width="36" height="52" rx="6" fill="#f3ead8" stroke="#d5c49c"/><rect x="32" y="28" width="36" height="12" rx="6" fill="#d5c49c"/><text x="50" y="58" font-size="12" text-anchor="middle" fill="#8a7a55" font-weight="bold">RICE</text><text x="50" y="72" font-size="9" text-anchor="middle" fill="#8a7a55">5 lb</text></svg>`,
 soysauce:`<svg viewBox="0 0 100 100"><rect x="42" y="12" width="16" height="14" rx="3" fill="#b03a2e"/><rect x="38" y="26" width="24" height="10" fill="#7a2a20"/><path d="M38 36 h24 l6 14 v30 a6 6 0 0 1 -6 6 h-24 a6 6 0 0 1 -6 -6 v-30 z" fill="#5c1f16"/><rect x="38" y="52" width="24" height="16" fill="#f3ead8"/><text x="50" y="64" font-size="8" text-anchor="middle" fill="#5c1f16" font-weight="bold">SOY</text></svg>`,
-yogurt:`<svg viewBox="0 0 100 100"><path d="M30 35 h40 l-5 45 a6 6 0 0 1 -6 5 h-18 a6 6 0 0 1 -6 -5 z" fill="#7fb6e8"/><rect x="28" y="28" width="44" height="10" rx="4" fill="#4a90d9"/><ellipse cx="50" cy="35" rx="20" ry="5" fill="#fff"/><text x="50" y="62" font-size="10" text-anchor="middle" fill="#fff" font-weight="bold">YOGURT</text></svg>`
+yogurt:`<svg viewBox="0 0 100 100"><path d="M30 35 h40 l-5 45 a6 6 0 0 1 -6 5 h-18 a6 6 0 0 1 -6 -5 z" fill="#7fb6e8"/><rect x="28" y="28" width="44" height="10" rx="4" fill="#4a90d9"/><ellipse cx="50" cy="35" rx="20" ry="5" fill="#fff"/><text x="50" y="62" font-size="10" text-anchor="middle" fill="#fff" font-weight="bold">YOGURT</text></svg>`,
+soybeans:`<svg viewBox="0 0 100 100"><path d="M35 32 h30 l5 10 v36 a8 8 0 0 1 -8 8 h-24 a8 8 0 0 1 -8 -8 v-36 z" fill="#d9b77c"/><rect x="33" y="22" width="34" height="12" rx="5" fill="#b98f52"/><text x="50" y="46" font-size="8" text-anchor="middle" fill="#7a5c2e" font-weight="bold">SOY</text><ellipse cx="44" cy="60" rx="6" ry="8" fill="#f2e3b8" transform="rotate(-20 44 60)"/><ellipse cx="58" cy="66" rx="6" ry="8" fill="#f2e3b8" transform="rotate(15 58 66)"/><ellipse cx="50" cy="76" rx="6" ry="8" fill="#eed9a0"/></svg>`
 };
 
 const PRODUCTS = [
@@ -137,6 +138,7 @@ const PRODUCTS = [
   {id:6, name:"White Sandwich Bread", cat:"Bakery",  price:2.49, unit:"each", art:"bread"},
   {id:7, name:"Long-Grain Rice, 5 lb",cat:"Pantry",  price:6.99, unit:"each", art:"rice"},
   {id:8, name:"Soy Sauce, 15 oz",     cat:"Pantry",  price:3.49, unit:"each", art:"soysauce"},
+  {id:9, name:"Dried Soybeans, 1 lb",  cat:"Pantry",  price:3.99, unit:"each", art:"soybeans"},
 ];
 const CATS = ["All","Dairy","Produce","Bakery","Pantry"];
 
@@ -166,7 +168,7 @@ function renderGrid(){
         <h3>${p.name}</h3>
         <div class="price">$${p.price.toFixed(2)} <small>${p.unit}</small></div>
         <div class="qty">
-          <button onclick="chQty(${p.id},-1)" aria-label="decrease">â</button>
+          <button onclick="chQty(${p.id},-1)" aria-label="decrease">−</button>
           <span id="q${p.id}">${cart[p.id]||0}</span>
           <button onclick="chQty(${p.id},1)" aria-label="increase">+</button>
         </div>
@@ -208,7 +210,7 @@ function renderCart(){
       <div class="thumb">${ART[p.art]}</div>
       <div class="info"><b>${p.name}</b><span>$${p.price.toFixed(2)} ${p.unit}</span>
         <div class="row">
-          <button onclick="chQty(${p.id},-1)">â</button><span>${q}</span>
+          <button onclick="chQty(${p.id},-1)">−</button><span>${q}</span>
           <button onclick="chQty(${p.id},1)">+</button>
         </div></div>
       <div class="amt">$${(p.price*q).toFixed(2)}</div>
@@ -223,7 +225,7 @@ function closeCart(){ document.getElementById("drawer").classList.remove("open")
 function checkout(){
   const t = cartTotals();
   if(!t.n){ alert("Your basket is empty."); return; }
-  alert("Demo checkout â "+t.n+" item(s), $"+t.amt.toFixed(2)+".\nTo take real payments, connect Stripe (we can set that up when you are ready).");
+  alert("Demo checkout — "+t.n+" item(s), $"+t.amt.toFixed(2)+".\nTo take real payments, connect Stripe (we can set that up when you are ready).");
 }
 
 /* ---------- theme ---------- */
